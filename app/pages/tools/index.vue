@@ -16,22 +16,32 @@
                 </header>
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     <!-- Tool Card 1 -->
-                    <div v-for="n in 9" class="group p-8 rounded-xl bg-white/5 hover:bg-white/6 transition-all duration-300 relative overflow-hidden">
+                    <NuxtLink v-for="tool in tools" :key="tool.name" :to="tool.link" class="group p-8 rounded-xl bg-white/5 hover:bg-white/6 transition-all duration-300 relative overflow-hidden">
                         <div
                             class="absolute -right-4 -top-4 w-24 h-24 metric-bloom opacity-0 group-hover:opacity-100 transition-opacity">
                         </div>
                         <div class="mb-6 inline-flex p-3 rounded-full bg-blue-600">
-                            <span class="material-symbols-outlined text-3xl" data-icon="functions">functions</span>
+                            <span class="material-symbols-outlined text-3xl" :data-icon="tool.icon">{{ tool.icon }}</span>
                         </div>
-                        <h3 class="text-xl font-headline font-bold text-white mb-2">Equation Solver</h3>
-                        <p class="text-sm text-gray-400">Resolve complex algebraic expressions in real-time.</p>
-                    </div>
+                        <h3 class="text-xl font-headline font-bold text-white mb-2">{{ tool.name }}</h3>
+                        <p class="text-sm text-gray-400">{{ tool.description }}</p>
+                    </NuxtLink>
                 </div>
             </div>
         </section>
     </main>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue';
 import ToolCategoriesBar from '~/components/elements/tools/ToolCategoriesBar.vue';
+
+const tools = ref([
+    {
+        name: 'Password Generator',
+        description: 'Create strong, random passwords in seconds.',
+        icon: 'key',
+        link: '/tools/password-generator'
+    },
+]);
 
 </script>
